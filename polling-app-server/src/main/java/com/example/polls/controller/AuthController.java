@@ -50,7 +50,8 @@ public class AuthController {
 
     @Autowired
     JwtTokenProvider tokenProvider;
-
+    
+   
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -67,6 +68,7 @@ public class AuthController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
+    //requestbody  http 몸체 자바객체로 변환
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
         if(userRepository.existsByUsername(signUpRequest.getUsername())) {

@@ -2,6 +2,8 @@ package com.example.polls.payload;
 
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
+
 public class PagedResponse<T> {
 
     private List<T> content;
@@ -11,9 +13,7 @@ public class PagedResponse<T> {
     private int totalPages;
     private boolean last;
 
-    public PagedResponse() {
-
-    }
+   
 
     public PagedResponse(List<T> content, int page, int size, long totalElements, int totalPages, boolean last) {
         this.content = content;

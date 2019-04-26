@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by rajeevkumarsingh on 20/11/17.
@@ -47,7 +49,9 @@ public class PollController {
                                                 @RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
         return pollService.getAllPolls(currentUser, page, size);
     }
-
+    
+   
+    
     @PostMapping
     @PreAuthorize("hasRole('USER')")
     public ResponseEntity<?> createPoll(@Valid @RequestBody PollRequest pollRequest) {

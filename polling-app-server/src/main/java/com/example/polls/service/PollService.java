@@ -66,7 +66,7 @@ public class PollService {
         List<PollResponse> pollResponses = polls.map(poll -> {
             return ModelMapper.mapPollToPollResponse(poll,
                     choiceVoteCountMap,
-                    creatorMap.get(poll.getCreatedBy()),
+                     creatorMap.get(poll.getCreatedBy()),
                     pollUserVoteMap == null ? null : pollUserVoteMap.getOrDefault(poll.getId(), null));
         }).getContent();
 
@@ -159,6 +159,8 @@ public class PollService {
 
         return pollRepository.save(poll);
     }
+    
+    
 
     public PollResponse getPollById(Long pollId, UserPrincipal currentUser) {
         Poll poll = pollRepository.findById(pollId).orElseThrow(
