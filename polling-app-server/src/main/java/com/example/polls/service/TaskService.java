@@ -94,6 +94,11 @@ public class TaskService {
 		 return pageResponse;
 		 
 		}
+
+	public List<Task> getAllTaskNoPage() {
+		
+		return taskRepository.findByStatus(Status.PROGRESS);
+	}
 	
 	
 	

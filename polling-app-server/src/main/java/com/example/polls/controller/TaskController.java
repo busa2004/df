@@ -40,6 +40,11 @@ public class TaskController {
 	        return TaskService.getAllTask(page,size);
 	    }
 	 	
+	 	@GetMapping("/nopage")
+	    public List<Task> getAllTask(){
+	    		return TaskService.getAllTaskNoPage();
+		}	
+	 	
 	 	@GetMapping("/update")
 	    public void updateTask(@Valid @RequestBody Task taskRequest) {
 	        TaskService.updateTask(taskRequest);

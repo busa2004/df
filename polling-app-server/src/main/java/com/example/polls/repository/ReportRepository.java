@@ -26,6 +26,12 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
 	Page<Report> findByStatusAndUserTask(Status progress, List<UserTask> userTask, Pageable pageable);
 	 @Query("SELECT v FROM Report v WHERE v.userTask.user.id = :userId and v.status = :progress")
 	Page<Report> findByStatusAndUserId(@Param("progress") Status progress,@Param("userId") Long userId, Pageable pageable);
+
+	List<Report> findByStatus(Status progress);
+	
+	
+	 @Query("SELECT v FROM Report v WHERE v.userTask.user.id = :userId and v.status != :progress")
+	List<Report> findByStatusAndUserId(@Param("progress") Status progress,@Param("userId") Long userId);
 	
 
 

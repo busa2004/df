@@ -20,5 +20,13 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
 
 	 Page<Task> findByStatus(Status progress, Pageable Pageable);
 
+	
+
+
+
+
+
+	List<Task> findByStatus(Status progress);
+
 
 }

@@ -33,17 +33,23 @@ public class ReportController {
 	        reportService.createReport(reportRequest);
 	        
 	    }
+	 	
+	 
+	 	
 	 	@GetMapping("/all")
-	    public PageResponse<Report> getAllReport(
-	    		@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-	    		@RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-	        return reportService.getAllReport(page,size);
+	    public List<Report> getAllReport(@CurrentUser UserPrincipal currentUser) {
+	        return reportService.getAllReport(currentUser.getId());
 	    }
+	 	
+	 	
+	 	
+	 	
 	 	@GetMapping
 	    public PageResponse<Report> getReport(
 	    		@RequestParam(value = "page", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER) int page,
-	    		@RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size) {
-	        return  reportService.getReportByUserTask(1L,page,size);
+	    		@RequestParam(value = "size", defaultValue = AppConstants.DEFAULT_PAGE_SIZE) int size,
+	    		@CurrentUser UserPrincipal currentUser) {
+	        return  reportService.getReportByUserTask(currentUser.getId(),page,size);
 	    }
 	 	@GetMapping("/delete")
 	    public void deleteReport(@Valid @RequestBody Report reportRequest) {

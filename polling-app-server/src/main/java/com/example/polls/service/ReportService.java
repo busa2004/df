@@ -48,20 +48,16 @@ public class ReportService {
 		 reportRepository.save(report);
 	}
 
-	public PageResponse<Report> getAllReport(int page, int size) {
+	public List<Report> getAllReport(Long userId) {
 		  
-		  Pageable pageable = PageRequest.of(page, size, new Sort(Direction.DESC, "createdAt"));
-		  Page<Report> reportPage = reportRepository.findByStatus(Status.PROGRESS,pageable);
-		  PageResponse<Report> pageResponse = pageConstructor(reportPage);
-		  if(reportPage.getNumberOfElements() == 0) {
-			   pageResponse.setContent(Collections.emptyList());
-	       }else {
-	    	   pageResponse.setContent(reportPage.getContent());
-	       }
+	
+		  List<Report> reportPage = reportRepository.findByStatusAndUserId(Status.END,userId);
 		  
-		  return pageResponse;
+		  
+		  return reportPage;
 	  }
-
+	
+	
 	public PageResponse<Report> getReportByUserTask(Long userId,int page, int size) {
 		 Pageable pageable = PageRequest.of(page, size, new Sort(Direction.DESC, "createdAt"));
 		  Page<Report> reportPage = reportRepository.findByStatusAndUserId(Status.PROGRESS,userId,pageable);
@@ -107,6 +103,8 @@ public class ReportService {
 		 return pageResponse;
 		 
 		}
+
+	
 
 
 	 
