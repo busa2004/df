@@ -5,16 +5,19 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.polls.exception.ResourceNotFoundException;
 import com.example.polls.model.Task;
 import com.example.polls.payload.PageResponse;
 import com.example.polls.payload.PagedResponse;
 import com.example.polls.payload.PollResponse;
+import com.example.polls.repository.TaskRepository;
 import com.example.polls.service.TaskService;
 import com.example.polls.util.AppConstants;
 
@@ -23,7 +26,8 @@ import com.example.polls.util.AppConstants;
 public class TaskController {
 	 @Autowired
 	 private TaskService TaskService;
-	 	
+	 @Autowired
+	  private TaskRepository taskRepository;
 	 	@GetMapping("/create")
 	    public void createTask(@Valid @RequestBody Task taskRequest) {
 	        TaskService.createTask(taskRequest);
@@ -43,6 +47,7 @@ public class TaskController {
 	 	
 	 	@GetMapping("/delete")
 	    public void deleteTask(@Valid @RequestBody Task taskRequest) {
+
 	        TaskService.deleteTask(taskRequest);
 	    }
 	 	
